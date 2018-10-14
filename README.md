@@ -19,11 +19,7 @@
 
 
 ## Synopsis
-'A' company needs to build an e-business system. The system is a typical 3 - tier enterprise
-application that integrates a presentation tier, a business tier, and a persistence tier. The
-executive of IT Department has decided to use Java EE open source technology and related
-platforms and tools to implement the system. The problem put forward was to design a very rudimentary e-commerce template to allow the company to
-manage their inventory.  
+
  
 This project required the following steps :
 
