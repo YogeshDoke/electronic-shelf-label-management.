@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!--Define composition-->
+    <ui:composition template="/template.xhtml">
+
+        <f:metadata>
+            <f:viewAction action="#{scarfController.initializeScarf()}" />
+        </f:metadata>
+
+        <!--Define title-->
+        <ui:define name="title">
+            <h:outputText value="Add new Item"></h:outputText>
+        </ui:define>
+
+        <!--Define body-->
+                <ui:define name="body">
+            
+            
+            
+            
+            
+            <body class="cbp-spmenu-push">
+	<div class="main-content">
+		<!--left-fixed -navigation-->
+	<div class=" sidebar" role="navigation">
+            <div class="navbar-collapse">
+		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+                    <ul class="nav" id="side-menu">
+			<li>
+                            <a href="/home/" ><i class="fa fa-home nav_icon"></i>Home</a>
+			</li>
+			<li>
+                            <a href="/home/scarf/List.xhtml" class="active"><i class="fa fa-cogs nav_icon"></i>Product Management</a>
+			</li>
+			<li class="">
+                            <a href="/home/scarf/tag.xhtml"><i class="fa fa-book nav_icon"></i>Tag Management</a>
+			</li>
+						
+                    </ul>
+					<!-- //sidebar-collapse -->
+		</nav>
+            </div>
+	</div>
+		<!--left-fixed -navigation-->
+		<!-- header-starts -->
+	<div class="sticky-header header-section ">
+            <div class="header-left">
+				<!--toggle button start-->
+		<button id="showLeftPush"><i class="fa fa-bars"></i></button>
+				<!--toggle button end-->
+				<!--logo -->
+                    <div class="logo">
+			<a href="/home/">
+                            <h1>ESL Solution</h1>
+                            <span>AdminPanel</span>
+			</a>
+                    </div>
+				<!--//logo-->
+				<!--search-box-->
+                    <div class="search-box">
+			<form class="input">
+                            <input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
+				<label class="input__label" for="input-31">
+                                    <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
+					<path d="m0,0l404,0l0,77l-404,0l0,-77z"/>
+                                    </svg>
+				</label>
+			</form>
+                    </div><!--//end-search-box-->
+		
+                    <div class="clearfix"> </div>
+            </div>
+                    <div class="header-right">
+                           <div class="profile_details_left"><!--notifications of menu start -->
+				<ul class="nofitications-dropdown">
+                                  <li class="dropdown head-dpdn">
+					<div class="col-md-4 modal-grids">
+                                            <button type="button" onclick="window.location.href='/home/'" class="btn btn-primary" data-toggle="modal">Home</button>
+                                        </div>
+                                    </li>
+                                    <li class="dropdown head-dpdn">
+					<div class="col-md-4 modal-grids">
+					<button type="button" onclick="window.location.href='/home/scarf/List.xhtml'" class="btn btn-primary" data-toggle="modal">Product Management</button>
+                                        </div>
+                                    </li>	
+                                    <li class="dropdown head-dpdn">
+					<div class="col-md-4 modal-grids">
+					<button type="button" onclick="window.location.href='/home/scarf/tag.xhtml'" class="btn btn-primary" data-toggle="modal">Tag Management</button>
+                                        </div>
+                                    </li>	
+				</ul>
+				<div class="clearfix"> </div>
+                            </div>
+				<!--notification menu end -->
+                            <div class="profile_details">		
+				<ul>
+				<li class="dropdown profile_details_drop">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+					<div class="profile_img">	
+					<span class="prfil-img"><img src="images/a.png" alt=""/> </span> 
+					<div class="user-name">
+                                            <p>Manager</p>
+                                            <span>Administrator</span>
+					</div>
+					<i class="fa fa-angle-down lnr"></i>
+					<i class="fa fa-angle-up lnr"></i>
+					<div class="clearfix"></div>	
+					</div>	
+                                    </a>
+				<ul class="dropdown-menu drp-mnu">
+				<li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+				</ul>
+                                 </li>
+				</ul>
+                            </div>
+				
+                            <div class="clearfix"> </div>				
+                    </div>
+                    <div class="clearfix"> </div>	
+	</div>
+                
+                 <div id="page-wrapper">
+			<div class="main-page">
+				<div class="tables">
+					<div class="table-responsive bs-example widget-shadow">
+                
+                
+            <!--Define panel-->
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+
+            <!--Create panel-->
+            <h:form>
+                <h:panelGrid columns="2">
+                    
+                    <h:outputLabel value="Barcode" for="b_id" />
+                    <h:inputText id="b_id" value="#{scarfController.selected.b_id}" title="Barcode" required="false" requiredMessage="#{bundle.RequiredMessage}"/>
+                    <h:outputLabel value="Item Name" for="item_name" />
+                    <h:inputText id="item_name" value="#{scarfController.selected.item_name}" title="Item Name" required="true" requiredMessage="#{bundle.RequiredMessage}"/>
+                    <h:outputLabel value="Manufacturer" for="manufacturer" />
+                    <h:inputText id="manufacturer" value="#{scarfController.selected.manufacturer}" title="Manufacturer" required="false" requiredMessage="#{bundle.RequiredMessage}"/>
+                    <h:outputLabel value="Category" for="description" />
+                    <h:inputText id="description" value="#{scarfController.selected.description}" title="Description" required="false" requiredMessage="#{bundle.RequiredMessage}"/>
+                    <h:outputLabel value="Price" for="item_price" />
+                    <h:inputText id="item_price" value="#{scarfController.selected.item_price}" title="Price" required="false" requiredMessage="#{bundle.RequiredMessage}"/>
+                    <h:outputLabel value="Tag Barcode" for="t_id" />
+                    <h:inputText id="t_id" value="#{scarfController.selected.t_id}" title="Tag Barcode" required="false" requiredMessage="#{bundle.RequiredMessage}"/>
+                    <h:outputLabel value="Discount" for="discount" />
+                    <h:inputText id="discount" value="#{scarfController.selected.discount}" title="Discount" required="false" requiredMessage="#{bundle.RequiredMessage}"/>
+                    <h:outputLabel value="Final Price" for="final_price" />
+                    <h:inputText id="final_price" value="#{scarfController.selected.final_price}" title="Final Price" required="false" requiredMessage="#{bundle.RequiredMessage}"/>
+                    
+                </h:panelGrid>
+                 <br/> 
+                <h:commandLink action="#{scarfController.persistScarf}" value="#{bundle.SaveLink}" />
+                 <br /> 
+             <a href="/home/" >Cancel</a>
+            <br />
+                
+            </h:form>
+
+            
+            	</div>
+		</div>
+</div>
+		</div>
+            
+<!--footer-->
+		<div class="footer">
+		   <p>&copy; 2018 ESL Solution {Admin Panel}. All Rights Reserved | Design by <a href="https://eslsol.com/" target="_blank">ESL Solution</a></p>
+		</div>
+
+	</div>
+	<!-- Classie -->
+		<script src="js/classie.js"></script>
+		<script>
+			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+				showLeftPush = document.getElementById( 'showLeftPush' ),
+				body = document.body;
+				
+			showLeftPush.onclick = function() {
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toright' );
+				classie.toggle( menuLeft, 'cbp-spmenu-open' );
+				disableOther( 'showLeftPush' );
+			};
+			
+
+			function disableOther( button ) {
+				if( button !== 'showLeftPush' ) {
+					classie.toggle( showLeftPush, 'disabled' );
+				}
+			}
+		</script>
+	<!--scrolling js-->
+	<script src="js/jquery.nicescroll.js"></script>
+	<script src="js/scripts.js"></script>
+	<!--//scrolling js-->
+	<!-- Bootstrap Core JavaScript -->
+   <script src="js/bootstrap.js"> </script>
+   </body>
+        </ui:define>
+
+        
+       
+
+    </ui:composition>
+
+</html>

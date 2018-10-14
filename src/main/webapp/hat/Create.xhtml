@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!--Define composition-->
+    <ui:composition template="/template.xhtml">
+
+        <f:metadata>
+            <f:viewAction action="#{hatController.initializeHat()}" />
+        </f:metadata>
+
+        <!--Define title-->
+        <ui:define name="title">
+            <h:outputText value="Create a new Hat"></h:outputText>
+        </ui:define>
+
+        <!--Define body-->
+        <ui:define name="body">
+
+            <!--Define panel-->
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+
+            <!--Create panel-->
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Style" for="style" />
+                    <h:inputText id="style" value="${hatController.selected.style}" title="Style" required="true" requiredMessage="#{bundle.RequiredMessage}"/>
+                    <h:outputLabel value="Colour" for="colour" />
+                    <h:inputText id="colour" value="${hatController.selected.colour}" title="Colour" required="true" requiredMessage="#{bundle.RequiredMessage}"/>
+                    <h:outputLabel value="Hat Size" for="size" />
+                    <h:inputText id="size" value="#{hatController.selected.size}" title="Hat Size" required="true" requiredMessage="#{bundle.RequiredMessage}"/>
+                    <h:outputLabel value="Manufacturer" for="manufacturer" />
+                    <h:inputText id="manufacturer" value="#{hatController.selected.manufacturer}" title="Manufacturer" required="true" requiredMessage="#{bundle.RequiredMessage}"/>
+                    <h:outputLabel value="Hat Name" for="item_name" />
+                    <h:inputText id="item_name" value="#{hatController.selected.item_name}" title="Hat Name" required="true" requiredMessage="#{bundle.RequiredMessage}"/>
+                    <h:outputLabel value="Price" for="item_price" />
+                    <h:inputText id="item_price" value="#{hatController.selected.item_price}" title="Price" required="true" requiredMessage="#{bundle.RequiredMessage}"/>
+                    <h:outputLabel value="Quantity" for="item_qty" />
+                    <h:inputText id="item_qty" value="#{hatController.selected.item_qty}" title="Quantity" required="true" requiredMessage="#{bundle.RequiredMessage}"/>
+                    <h:outputLabel value="Order Code" for="order_code" />
+                    <h:inputText id="order_code" value="#{hatController.selected.order_code}" title="Order Code" required="true" requiredMessage="#{bundle.RequiredMessage}"/>
+                    <h:outputLabel value="Description" for="description" />
+                    <h:inputText id="description" value="#{hatController.selected.description}" title="Description" required="true" requiredMessage="#{bundle.RequiredMessage}"/>
+                </h:panelGrid>
+                <h:commandLink action="#{hatController.persistHat}" value="#{bundle.SaveLink}" />
+            </h:form>
+
+        </ui:define>
+
+        <!--Define navi-->
+        <ui:define name="navi">
+            <h:form>
+                <br />
+                <br />
+                <h:link outcome="List.xhtml" value="#{bundle.ShowHatLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index.xhtml" value="#{bundle.IndexLink}"/>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+
+</html>

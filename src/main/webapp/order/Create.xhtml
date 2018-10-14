@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!--Define composition-->
+    <ui:composition template="/template.xhtml">
+
+        <f:metadata>
+            <f:viewAction action="#{custorderController.clearCustOrder()}" />
+        </f:metadata>
+
+        <!--Define title-->
+        <ui:define name="title"></ui:define>
+
+        <!--Define body-->
+        <ui:define name="body">
+
+            <!--Define panel-->
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+
+            <!--Search for Customer panel-->
+            <h:form id="search">
+                <h3>Select a Customer</h3>
+                <h:panelGrid columns="2">
+                    <h:dataTable id="customers" value="#{customerController.findAll()}" var="s" border="1">
+
+                        <!--Define name column-->
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Name"/>
+                            </f:facet>
+                            <h:outputText value="#{s.name}"/>
+                        </h:column>
+
+                        <!--Define email column-->
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Email Address"/>
+                            </f:facet>
+                            <h:outputText value="#{s.email}"/>
+                        </h:column>
+
+                        <!--Define email column-->
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Customer ID"/>
+                            </f:facet>
+                            <h:outputText value="#{s.customer_id}"/>
+                        </h:column>
+
+                        <!--Define email column-->
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Phone"/>
+                            </f:facet>
+                            <h:outputText value="#{s.phone}"/>
+                        </h:column>
+
+                        <!--Define street column-->
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Address"/>
+                            </f:facet>
+                            <h:outputText  value="#{s.street1} #{s.street2} #{s.city}, #{s.state}, #{s.postcode}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Add"/>
+                            </f:facet>
+                            <h:commandLink action="#{custorderController.initializeCustOrder(s.customer_id)}" value="Select" />
+                        </h:column>       
+                    </h:dataTable>
+                </h:panelGrid>
+            </h:form>
+
+            <!--Search for Item panel-->
+            <h:form id="itemtab">
+                <h3>Select Items</h3>
+                <h:panelGrid columns="2">
+                    <h:dataTable id="itemtable" value="#{custorderController.findAllItems()}" var="s" border="1">
+
+                        <!--Define name column-->
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Name"/>
+                            </f:facet>
+                            <h:outputText value="#{s.item_name}"/>
+                        </h:column>
+
+                        <!--Define colour column-->
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Item Price"/>
+                            </f:facet>
+                            <h:outputText value="#{s.item_price}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Add"/>
+                            </f:facet>
+                            <h:commandLink action="#{custorderController.addOrder(s.id)}" value="Add"/>                     
+                        </h:column>  
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Remove"/>
+                            </f:facet>
+                            <h:commandLink action="#{custorderController.removeOrder(s.id)}" value="Remove" />
+                        </h:column>  
+
+                    </h:dataTable>
+                    <h:commandButton value="Save Order" action="#{custorderController.persistCustOrder()}" />
+                </h:panelGrid>
+            </h:form>
+
+            <!--Order Details panel-->
+            <h:form id="customer">
+            <h:panelGrid columns="2">
+                    <h:outputText value="Date : "/>
+                    <h:outputText value="#{custorderController.custorder.creationDate.toString()}" title="Date"/>
+                    <h:outputText value="Customer Name : "/>
+                    <h:outputText value="#{custorderController.custorder.customer.name}" title="Customer Name"/>
+                    <h:outputText value="Email : "/>
+                    <h:outputText value="#{custorderController.custorder.customer.email}" title="Email"/>
+                    <h:outputText value="Phone : "/>
+                    <h:outputText value="#{custorderController.custorder.customer.phone}" title="Phone"/>
+                    <h:outputText value="Address : "/>
+                    <h:outputText value="#{custorderController.custorder.customer.street1},
+                                  #{custorderController.custorder.customer.city},
+                                  #{custorderController.custorder.customer.postcode},
+                                  #{custorderController.custorder.customer.state},
+                                  #{custorderController.custorder.customer.country}" title="Address"/>
+</h:panelGrid>
+            </h:form>
+
+             <h:form id="orderitems">
+            <h:panelGrid columns="2">
+                    <h:dataTable id="itemtable" value="#{custorderController.selected.item}" var="s" border="1">
+
+                        <!--Define name column-->
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Name"/>
+                            </f:facet>
+                            <h:outputText value="#{s.item_name}"/>
+                        </h:column>
+
+                        <!--Define manufacturer column-->
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Manufacturer"/>
+                            </f:facet>
+                            <h:outputText value="#{s.manufacturer}"/>
+                        </h:column>
+
+                        <!--Define colour column-->
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Item Price"/>
+                            </f:facet>
+                            <h:outputText value="#{s.item_price}"/>
+                        </h:column>
+
+                        <!--Define quantity column-->
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Description"/>
+                            </f:facet>
+                            <h:outputText value="#{s.description}"/>
+                        </h:column>
+
+                    </h:dataTable>
+
+                </h:panelGrid>
+
+            </h:form>
+
+        </ui:define>
+
+        <!--Define navi-->
+        <ui:define name="navi">
+            <h:form>
+                <br />
+                <br />
+                <h:link outcome="List.xhtml" value="#{bundle.ShowOrderLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index.xhtml" value="#{bundle.IndexLink}"/>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+
+</html>

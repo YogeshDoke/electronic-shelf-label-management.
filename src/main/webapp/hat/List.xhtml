@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!--Define composition-->
+    <ui:composition template="/template.xhtml">
+
+        <!--Define title-->
+        <ui:define name="title">
+            <h:outputText value="List all Hats"></h:outputText>
+        </ui:define>
+
+        <!--Define content-->
+        <ui:define name="body">
+                        <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form id="item">
+                <h:panelGrid columns="4">
+            <h:dataTable id="hats" value="#{hatController.findAll()}" var="s" border="1">
+
+                <!--Define name column-->
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Name"/>
+                    </f:facet>
+                    <h:link outcome="View.xhtml?id=#{s.id}" value="#{s.item_name}"/>
+                </h:column>
+
+                <!--Define manufacturer column-->
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Manufacturer"/>
+                    </f:facet>
+                    <h:outputText value="#{s.manufacturer}"/>
+                </h:column>
+
+                <!--Define colour column-->
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Colour"/>
+                    </f:facet>
+                    <h:outputText value="#{s.colour}"/>
+                </h:column>
+
+                <!--Define quantity column-->
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Size"/>
+                    </f:facet>
+                    <h:outputText value="#{s.size}"/>
+                </h:column>
+
+                <!--Define quantity column-->
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quantity"/>
+                    </f:facet>
+                    <h:outputText value="#{s.item_qty}"/>
+                </h:column>
+
+                <!--Define price column-->
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Price"/>
+                    </f:facet>
+                    <h:outputText value="$#{s.item_price}"/>
+                </h:column>
+
+            </h:dataTable>
+              </h:panelGrid>
+            </h:form>
+
+        </ui:define>
+
+        <!--Define navigation-->
+        <ui:define name="navi">
+            <br />
+            <br />
+            <h:link outcome="Create" value="#{bundle.CreateHatLink}" />
+            <br />
+            <br />
+            <h:link outcome="/index.xhtml" value="#{bundle.IndexLink}"/>                           
+        </ui:define>
+
+    </ui:composition>
+
+</html>
