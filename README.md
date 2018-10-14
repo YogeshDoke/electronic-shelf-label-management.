@@ -3,7 +3,7 @@
   <a href="http://www.oracle.com/technetwork/java/javaee/overview/index.html"><img src="https://cloud.githubusercontent.com/assets/5771200/19332084/330b8938-912c-11e6-8874-f992e3503bae.png" alt="Java EE" height="150"></a>
   <br>
   <br>
-  ESL Management
+  electronic-shelf-label-management Management
   <br>
   <br>
 </h1>
